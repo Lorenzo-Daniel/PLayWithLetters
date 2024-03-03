@@ -3,6 +3,15 @@ import "animate.css";
 import { animals } from "./animalData";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import coolLetter from "../src/Audios/coolLetter.wav";
+import error from "../src/Audios/error.wav";
+import letterSelected from "../src/Audios/letterSelected.wav";
+import success from "../src/Audios/success.wav";
+import success1 from "../src/Audios/success1.wav";
+import mounted from "../src/Audios/mounted.wav";
+import back from "../src/Audios/back.wav";
+import buzz from "buzz";
+
 function App() {
   const [index, setIndex] = useState(0);
   const [letters, setLetters] = useState([]);
@@ -20,32 +29,22 @@ function App() {
     window.speechSynthesis.speak(speech);
   };
 
-  // const [isPlaying, setIsPlaying] = useState(false); // Estado para controlar la reproducción de audio
-  // const [isFinished, setIsFinished] = useState(false); // Estado para indicar si la reproducción ha terminado
-  // // eslint-disable-next-line
-  // let currentSpeech = null; // Variable para almacenar la instancia actual de SpeechSynthesisUtterance|
-  // const speak = (ingredients,isPLaying ) => {
-  //   if (!isPlaying) {
-  //     const speech = new SpeechSynthesisUtterance();
-  //     speech.text = `The ingredients needed for this recipe are: ${ingredients}`;
-  //     speech.lang = "es";
-  //     window.speechSynthesis.speak(speech);
-  //     currentSpeech = speech; // Almacena la instancia actual de SpeechSynthesisUtterance
-  //     setIsPlaying(true); // Actualiza el estado para indicar que el audio está reproduciéndose
-  //     setIsFinished(false); // Reinicia el estado para indicar que la reproducción no ha terminado
-  //     speech.onend = () => {
-  //       setIsFinished(true); // Actualiza el estado para indicar que la reproducción ha terminado
-  //       setIsPlaying(false); // Actualiza el estado para indicar que la reproducción ha terminado
-  //     };
-  //   } else {
-  //     window.speechSynthesis.cancel(); // Cancela la síntesis de voz actual
-  //     currentSpeech = null; // Limpia la variable currentSpeech
-  //     setIsPlaying(false); // Actualiza el estado para indicar que el audio se detuvo
-  //   }
-  // };
-
-
+  let selectedLetter = new buzz.sound(letterSelected);
+  selectedLetter.setVolume(9);
+  let cool = new buzz.sound(coolLetter);
+  selectedLetter.setVolume(25);
+  let mount = new buzz.sound(mounted);
+  mount.setVolume(25);
+  let letterError = new buzz.sound(error);
+  letterError.setVolume(50);
+  let successLevel = new buzz.sound(success);
+  successLevel.setVolume(15);
+  let successEnd = new buzz.sound(success1);
+  successEnd.setVolume(50);
+  let backToStart = new buzz.sound(back);
+  backToStart.setVolume(25);
   useEffect(() => {
+    backToStart.play();
     const initialCount = {};
     word.split("").forEach((letter) => {
       initialCount[letter] = (initialCount[letter] || 0) + 1;
@@ -53,13 +52,16 @@ function App() {
     setLetters(word.split(""));
     setShuffledLetters(shuffleArray([...word.split("")]));
     setRemovedLettersCount(initialCount);
+    // eslint-disable-next-line
   }, [word]);
 
   useEffect(() => {
     if (disabledLetters.length === word.length) {
       setFinishLevel(true);
-  speachLetter(animals[index].word)
-
+      setTimeout(() => {
+        speachLetter(animals[index].word);
+      }, 1000);
+      successLevel.play();
     } else {
       setFinishLevel(false);
     }
@@ -68,10 +70,19 @@ function App() {
       index === animals.length - 1
     ) {
       setCongratulations(true);
+      setTimeout(() => {
+        speachLetter(
+          "MUY BIEN!. LO HAZ LOGRADO!! TOCA EL BOTON PARA VOLVER A EMPEZAR "
+        );
+      }, 3500);
+      setTimeout(() => {
+        successEnd.play();
+      }, 2000);
     } else {
       setCongratulations(false);
     }
-  }, [disabledLetters, word, index]);
+    // eslint-disable-next-line
+  }, [disabledLetters, word, index,]);
 
   const handleDragStart = (e, letter) => {
     e.dataTransfer.setData("text/plain", letter);
@@ -102,6 +113,10 @@ function App() {
     return (e) => {
       e.preventDefault();
       const droppedLetter = e.dataTransfer.getData("text/plain");
+      if (droppedLetter !== targetLetter) {
+        letterError.play();
+      }
+
       if (
         droppedLetter === targetLetter &&
         removedLettersCount[droppedLetter] > 0 &&
@@ -127,7 +142,7 @@ function App() {
 
           e.target.className =
             "word dropped animate__animated animate__rubberBand ";
-            
+          cool.play();
         }
       }
     };
@@ -200,11 +215,13 @@ function App() {
               onMouseDown={(e) => {
                 e.target.style.padding = "40px";
                 speachLetter(letter);
+                selectedLetter.play();
               }}
               onMouseLeave={(e) => (e.target.style.padding = "")}
               onTouchStart={(e) => {
                 e.target.style.padding = "40px";
                 speachLetter(letter);
+                selectedLetter.play();
               }}
               onTouchEnd={(e) => (e.target.style.padding = "")}
             >
@@ -223,7 +240,10 @@ function App() {
                   setDisabledLetters([]);
                   setLetters([]);
                 } else {
-                  window.location.reload();
+                  backToStart.play();
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1000);
                 }
               }}
             >
