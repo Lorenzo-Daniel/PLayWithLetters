@@ -23,29 +23,29 @@ function App() {
 
 
 
-  const [isPlaying, setIsPlaying] = useState(false); // Estado para controlar la reproducción de audio
-  const [isFinished, setIsFinished] = useState(false); // Estado para indicar si la reproducción ha terminado
-  // eslint-disable-next-line
-  let currentSpeech = null; // Variable para almacenar la instancia actual de SpeechSynthesisUtterance|
-  const speak = (ingredients,isPLaying ) => {
-    if (!isPlaying) {
-      const speech = new SpeechSynthesisUtterance();
-      speech.text = `The ingredients needed for this recipe are: ${ingredients}`;
-      speech.lang = "es";
-      window.speechSynthesis.speak(speech);
-      currentSpeech = speech; // Almacena la instancia actual de SpeechSynthesisUtterance
-      setIsPlaying(true); // Actualiza el estado para indicar que el audio está reproduciéndose
-      setIsFinished(false); // Reinicia el estado para indicar que la reproducción no ha terminado
-      speech.onend = () => {
-        setIsFinished(true); // Actualiza el estado para indicar que la reproducción ha terminado
-        setIsPlaying(false); // Actualiza el estado para indicar que la reproducción ha terminado
-      };
-    } else {
-      window.speechSynthesis.cancel(); // Cancela la síntesis de voz actual
-      currentSpeech = null; // Limpia la variable currentSpeech
-      setIsPlaying(false); // Actualiza el estado para indicar que el audio se detuvo
-    }
-  };
+  // const [isPlaying, setIsPlaying] = useState(false); // Estado para controlar la reproducción de audio
+  // const [isFinished, setIsFinished] = useState(false); // Estado para indicar si la reproducción ha terminado
+  // // eslint-disable-next-line
+  // let currentSpeech = null; // Variable para almacenar la instancia actual de SpeechSynthesisUtterance|
+  // const speak = (ingredients,isPLaying ) => {
+  //   if (!isPlaying) {
+  //     const speech = new SpeechSynthesisUtterance();
+  //     speech.text = `The ingredients needed for this recipe are: ${ingredients}`;
+  //     speech.lang = "es";
+  //     window.speechSynthesis.speak(speech);
+  //     currentSpeech = speech; // Almacena la instancia actual de SpeechSynthesisUtterance
+  //     setIsPlaying(true); // Actualiza el estado para indicar que el audio está reproduciéndose
+  //     setIsFinished(false); // Reinicia el estado para indicar que la reproducción no ha terminado
+  //     speech.onend = () => {
+  //       setIsFinished(true); // Actualiza el estado para indicar que la reproducción ha terminado
+  //       setIsPlaying(false); // Actualiza el estado para indicar que la reproducción ha terminado
+  //     };
+  //   } else {
+  //     window.speechSynthesis.cancel(); // Cancela la síntesis de voz actual
+  //     currentSpeech = null; // Limpia la variable currentSpeech
+  //     setIsPlaying(false); // Actualiza el estado para indicar que el audio se detuvo
+  //   }
+  // };
 
 
 
