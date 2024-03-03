@@ -3,6 +3,7 @@ import "animate.css";
 import { animals } from "./animalData";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 function App() {
   const [index, setIndex] = useState(0);
   const [letters, setLetters] = useState([]);
@@ -49,14 +50,19 @@ function App() {
     const droppedLetter = e.dataTransfer.getData("text/plain");
     if (letter === droppedLetter) {
       e.target.className = "letter-box  dropped";
-      
+      e.target.style.padding = '25px'
+    }else {
+      e.target.className = "letter-box";
     }
   };
 
   const handleDragLeave = (e, letter) => {
-    const isDropped = !disabledLetters.includes(letter);
-    if (isDropped) {
-      e.target.className = "letter-box ";
+   
+    const isDropped = e.dataTransfer.getData("text/plain");
+    if (isDropped === letter) {
+      e.target.className = "letter-box  ";
+    } if(disabledLetters.includes(letter)){
+      e.target.className = "letter-box dropped ";
     }
   };
 
@@ -129,7 +135,6 @@ function App() {
             onDragLeave={(e) => {
               handleDragLeave(e, letter);
             }}
-          
           >
             {letter}
           </div>
@@ -164,6 +169,7 @@ function App() {
               onMouseLeave={(e) => (e.target.style.padding = "")}
               onTouchStart={(e) => (e.target.style.padding = "40px")}
               onTouchEnd={(e) => (e.target.style.padding = "")}
+              ond
             >
               {letter}
             </div>

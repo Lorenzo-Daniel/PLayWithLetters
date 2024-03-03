@@ -27,8 +27,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     background-color: white;
     color: black;
     margin: 5px;
@@ -41,8 +41,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     margin: 5px;
     padding: 18px;
     border-radius: 5px;
