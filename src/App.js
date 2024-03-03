@@ -12,7 +12,54 @@ function App() {
   const [congratulations, setCongratulations] = useState(false);
   const word = animals[index].word;
   const [finishLevel, setFinishLevel] = useState(false);
-  console.log(finishLevel);
+
+
+  const speachLetter = (letter) => {
+    const speech = new SpeechSynthesisUtterance();
+      speech.text = letter;
+      speech.lang = "es";
+      window.speechSynthesis.speak(speech);
+  }
+
+
+
+  const [isPlaying, setIsPlaying] = useState(false); // Estado para controlar la reproducción de audio
+  const [isFinished, setIsFinished] = useState(false); // Estado para indicar si la reproducción ha terminado
+  // eslint-disable-next-line
+  let currentSpeech = null; // Variable para almacenar la instancia actual de SpeechSynthesisUtterance|
+  const speak = (ingredients,isPLaying ) => {
+    if (!isPlaying) {
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = `The ingredients needed for this recipe are: ${ingredients}`;
+      speech.lang = "es";
+      window.speechSynthesis.speak(speech);
+      currentSpeech = speech; // Almacena la instancia actual de SpeechSynthesisUtterance
+      setIsPlaying(true); // Actualiza el estado para indicar que el audio está reproduciéndose
+      setIsFinished(false); // Reinicia el estado para indicar que la reproducción no ha terminado
+      speech.onend = () => {
+        setIsFinished(true); // Actualiza el estado para indicar que la reproducción ha terminado
+        setIsPlaying(false); // Actualiza el estado para indicar que la reproducción ha terminado
+      };
+    } else {
+      window.speechSynthesis.cancel(); // Cancela la síntesis de voz actual
+      currentSpeech = null; // Limpia la variable currentSpeech
+      setIsPlaying(false); // Actualiza el estado para indicar que el audio se detuvo
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     const initialCount = {};
@@ -49,18 +96,18 @@ function App() {
     const droppedLetter = e.dataTransfer.getData("text/plain");
     if (letter === droppedLetter) {
       e.target.className = "letter-box  dropped";
-      e.target.style.padding = '25px'
-    }else {
+      e.target.style.padding = "25px";
+    } else {
       e.target.className = "letter-box";
     }
   };
 
   const handleDragLeave = (e, letter) => {
-   
     const isDropped = e.dataTransfer.getData("text/plain");
     if (isDropped === letter) {
       e.target.className = "letter-box  ";
-    } if(disabledLetters.includes(letter)){
+    }
+    if (disabledLetters.includes(letter)) {
       e.target.className = "letter-box dropped ";
     }
   };
@@ -92,7 +139,8 @@ function App() {
             return newShuffledLetters;
           });
 
-          e.target.className = "word dropped";
+          e.target.className =
+            "word dropped animate__animated animate__rubberBand ";
         }
       }
     };
@@ -101,8 +149,6 @@ function App() {
   const shuffleArray = (array) => {
     return array.sort(() => Math.random() - 0.5);
   };
-
- 
 
   return (
     <div
@@ -164,11 +210,11 @@ function App() {
               style={{
                 transform: `rotate(${rotate}deg) translateY(${translateY}px)`,
               }}
-              onMouseDown={(e) => (e.target.style.padding = "40px")}
+              onMouseDown={(e) => {(e.target.style.padding = "40px")
+              speachLetter(letter)}}
               onMouseLeave={(e) => (e.target.style.padding = "")}
-              onTouchStart={(e) => (e.target.style.padding = "40px")}
-              onTouchEnd={(e) => (e.target.style.padding = "")}
-              ond
+              // onTouchStart={(e) => (e.target.style.padding = "40px")}
+              // onTouchEnd={(e) => (e.target.style.padding = "")}
             >
               {letter}
             </div>
