@@ -3,7 +3,6 @@ import "animate.css";
 import { animals } from "./animalData";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 function App() {
   const [index, setIndex] = useState(0);
   const [letters, setLetters] = useState([]);
