@@ -158,7 +158,6 @@ function App() {
       style={{ backgroundColor: animals[index].backGround }}
     >
       <div className=" main">
-        {/* <img src={abc} alt={abc} className="position-absolute" width={200} style={{left:0,top:0}}/> */}
         <img
           className=" animate__animated animate__bounceIn animate__faster"
           width={320}
@@ -169,7 +168,7 @@ function App() {
         <div
           className={
             finishLevel
-              ? "animate__animated animate__rubberBand    word"
+              ? "animate__animated animate__rubberBand word"
               : "word animate__animated animate__lightSpeedInRight  "
           }
         >

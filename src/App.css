@@ -12,7 +12,6 @@ body, html {
   align-items: center;
   justify-content: center;
   row-gap: 15px;
-  margin-top: 200px;
 }
 
 
@@ -30,9 +29,6 @@ body, html {
     font-weight: 400;
     font-style: normal;
     font-size: 30px;
-  background-image: url('../src/images/abc.png');
-  background-repeat: no-repeat;
-  background-position-x: center;
   }
   .letter-box {
     display: flex;
@@ -89,9 +85,7 @@ body, html {
 }
 
 @media (min-width:768px) {
-  .App {
-  background-position-x: 15px;
-  }
+ 
   .letter-box {
     width: 50px;
     height: 50px;
