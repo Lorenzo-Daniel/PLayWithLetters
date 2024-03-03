@@ -44,6 +44,7 @@ function App() {
   //   }
   // };
 
+
   useEffect(() => {
     const initialCount = {};
     word.split("").forEach((letter) => {
@@ -57,6 +58,8 @@ function App() {
   useEffect(() => {
     if (disabledLetters.length === word.length) {
       setFinishLevel(true);
+  speachLetter(animals[index].word)
+
     } else {
       setFinishLevel(false);
     }
@@ -124,6 +127,7 @@ function App() {
 
           e.target.className =
             "word dropped animate__animated animate__rubberBand ";
+            
         }
       }
     };
