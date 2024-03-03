@@ -13,15 +13,12 @@ function App() {
   const word = animals[index].word;
   const [finishLevel, setFinishLevel] = useState(false);
 
-
   const speachLetter = (letter) => {
     const speech = new SpeechSynthesisUtterance();
-      speech.text = letter ;
-      speech.lang = "es";
-      window.speechSynthesis.speak(speech);
-  }
-
-
+    speech.text = letter;
+    speech.lang = "es";
+    window.speechSynthesis.speak(speech);
+  };
 
   // const [isPlaying, setIsPlaying] = useState(false); // Estado para controlar la reproducción de audio
   // const [isFinished, setIsFinished] = useState(false); // Estado para indicar si la reproducción ha terminado
@@ -46,20 +43,6 @@ function App() {
   //     setIsPlaying(false); // Actualiza el estado para indicar que el audio se detuvo
   //   }
   // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     const initialCount = {};
@@ -210,10 +193,15 @@ function App() {
               style={{
                 transform: `rotate(${rotate}deg) translateY(${translateY}px)`,
               }}
-              onMouseDown={(e) => {(e.target.style.padding = "40px")
-              speachLetter(letter)}}
+              onMouseDown={(e) => {
+                e.target.style.padding = "40px";
+                speachLetter(letter);
+              }}
               onMouseLeave={(e) => (e.target.style.padding = "")}
-              onTouchStart={(e) => (e.target.style.padding = "40px")}
+              onTouchStart={(e) => {
+                e.target.style.padding = "40px";
+                speachLetter(letter);
+              }}
               onTouchEnd={(e) => (e.target.style.padding = "")}
             >
               {letter}
