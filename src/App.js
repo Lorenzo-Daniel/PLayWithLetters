@@ -49,6 +49,14 @@ function App() {
     const droppedLetter = e.dataTransfer.getData("text/plain");
     if (letter === droppedLetter) {
       e.target.className = "letter-box  dropped";
+      
+    }
+  };
+
+  const handleDragLeave = (e, letter) => {
+    const isDropped = !disabledLetters.includes(letter);
+    if (isDropped) {
+      e.target.className = "letter-box ";
     }
   };
 
@@ -89,13 +97,7 @@ function App() {
     return array.sort(() => Math.random() - 0.5);
   };
 
-  const handleDragLeave = (e, letter) => {
-    const isDropped = !disabledLetters.includes(letter);
-    if (isDropped) {
-      e.target.className = "letter-box dropped";
-      e.target.className = "letter-box ";
-    }
-  };
+ 
 
   return (
     <div
@@ -121,8 +123,13 @@ function App() {
             key={index}
             className="letter-box "
             onDrop={handleDrop(letter)}
-            onDragOver={(e) => handleDragOver(e, letter)}
-            onDragLeave={(e) => handleDragLeave(e, letter)}
+            onDragOver={(e) => {
+              handleDragOver(e, letter);
+            }}
+            onDragLeave={(e) => {
+              handleDragLeave(e, letter);
+            }}
+          
           >
             {letter}
           </div>
@@ -153,6 +160,8 @@ function App() {
               style={{
                 transform: `rotate(${rotate}deg) translateY(${translateY}px)`,
               }}
+              onMouseDown={(e) => (e.target.style.padding = "40px")}
+              onMouseLeave={(e) => (e.target.style.padding = "")}
             >
               {letter}
             </div>
