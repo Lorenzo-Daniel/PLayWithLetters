@@ -162,6 +162,8 @@ function App() {
               }}
               onMouseDown={(e) => (e.target.style.padding = "40px")}
               onMouseLeave={(e) => (e.target.style.padding = "")}
+              onTouchStart={(e) => (e.target.style.padding = "40px")}
+              onTouchEnd={(e) => (e.target.style.padding = "")}
             >
               {letter}
             </div>
