@@ -82,7 +82,7 @@ function App() {
       setCongratulations(false);
     }
     // eslint-disable-next-line
-  }, [disabledLetters, word, index,]);
+  }, [disabledLetters, word, index]);
 
   const handleDragStart = (e, letter) => {
     e.dataTransfer.setData("text/plain", letter);
@@ -154,105 +154,108 @@ function App() {
 
   return (
     <div
-      className="App flex-column gap-4"
+      className="App flex-column  position-relative "
       style={{ backgroundColor: animals[index].backGround }}
     >
-      <img
-        className=" animate__animated animate__bounceIn animate__faster"
-        width={320}
-        height={300}
-        src={animals[index].image}
-        alt={animals[index].word}
-      />
-      <div
-        className={
-          finishLevel
-            ? "animate__animated animate__rubberBand    word"
-            : "word animate__animated animate__lightSpeedInRight  "
-        }
-      >
-        {letters.map((letter, index) => (
-          <div
-            key={index}
-            className="letter-box "
-            onDrop={handleDrop(letter)}
-            onDragOver={(e) => {
-              handleDragOver(e, letter);
-            }}
-            onDragLeave={(e) => {
-              handleDragLeave(e, letter);
-            }}
-          >
-            {letter}
-          </div>
-        ))}
-      </div>
-      {congratulations && (
-        <div className="animate__animated animate__tada">
-          <p className="m-0">Muy Bien!</p>
-        </div>
-      )}
-      <div
-        className={
-          !finishLevel
-            ? "shuffled-letters  animate__animated animate__lightSpeedInLeft word "
-            : "word animate__animated animate__lightSpeedInRight  "
-        }
-      >
-        {shuffledLetters.map((letter, index) => {
-          const rotate = Math.floor(Math.random() * 91) - 45; // Valores entre -45 y 45
-          const translateY = Math.floor(Math.random() * 25) - 12; // Valores entre -12 y 12
-
-          return (
+      <div className=" main">
+        {/* <img src={abc} alt={abc} className="position-absolute" width={200} style={{left:0,top:0}}/> */}
+        <img
+          className=" animate__animated animate__bounceIn animate__faster"
+          width={320}
+          height={300}
+          src={animals[index].image}
+          alt={animals[index].word}
+        />
+        <div
+          className={
+            finishLevel
+              ? "animate__animated animate__rubberBand    word"
+              : "word animate__animated animate__lightSpeedInRight  "
+          }
+        >
+          {letters.map((letter, index) => (
             <div
               key={index}
-              className={letter === "" ? "" : "letter-box draggable"}
-              draggable={!disabledLetters.includes(letter)}
-              onDragStart={(e) => handleDragStart(e, letter)}
-              style={{
-                transform: `rotate(${rotate}deg) translateY(${translateY}px)`,
+              className="letter-box "
+              onDrop={handleDrop(letter)}
+              onDragOver={(e) => {
+                handleDragOver(e, letter);
               }}
-              onMouseDown={(e) => {
-                e.target.style.padding = "40px";
-                speachLetter(letter);
-                selectedLetter.play();
+              onDragLeave={(e) => {
+                handleDragLeave(e, letter);
               }}
-              onMouseLeave={(e) => (e.target.style.padding = "")}
-              onTouchStart={(e) => {
-                e.target.style.padding = "40px";
-                speachLetter(letter);
-                selectedLetter.play();
-              }}
-              onTouchEnd={(e) => (e.target.style.padding = "")}
             >
               {letter}
             </div>
-          );
-        })}
-        {finishLevel ? (
-          <div>
-            <button
-              className="animate__animated animate__zoomIn  btn btn-primary "
-              onClick={() => {
-                if (index < animals.length - 1) {
-                  setIndex((prev) => prev + 1);
-                  setFinishLevel(false);
-                  setDisabledLetters([]);
-                  setLetters([]);
-                } else {
-                  backToStart.play();
-                  setTimeout(() => {
-                    window.location.reload();
-                  }, 1000);
-                }
-              }}
-            >
-              {index < animals.length - 1 ? "SIGUIENTE" : "VOLVER A EMPEZAR"}
-            </button>
+          ))}
+        </div>
+        {congratulations && (
+          <div className="animate__animated animate__tada">
+            <p className="m-0">Muy Bien!</p>
           </div>
-        ) : (
-          ""
         )}
+        <div
+          className={
+            !finishLevel
+              ? "shuffled-letters  animate__animated animate__lightSpeedInLeft word "
+              : "word animate__animated animate__lightSpeedInRight  "
+          }
+        >
+          {shuffledLetters.map((letter, index) => {
+            const rotate = Math.floor(Math.random() * 91) - 45; // Valores entre -45 y 45
+            const translateY = Math.floor(Math.random() * 25) - 12; // Valores entre -12 y 12
+
+            return (
+              <div
+                key={index}
+                className={letter === "" ? "" : "letter-box draggable"}
+                draggable={!disabledLetters.includes(letter)}
+                onDragStart={(e) => handleDragStart(e, letter)}
+                style={{
+                  transform: `rotate(${rotate}deg) translateY(${translateY}px)`,
+                }}
+                onMouseDown={(e) => {
+                  e.target.style.padding = "40px";
+                  speachLetter(letter);
+                  selectedLetter.play();
+                }}
+                onMouseLeave={(e) => (e.target.style.padding = "")}
+                onTouchStart={(e) => {
+                  e.target.style.padding = "40px";
+                  speachLetter(letter);
+                  selectedLetter.play();
+                }}
+                onTouchEnd={(e) => (e.target.style.padding = "")}
+              >
+                {letter}
+              </div>
+            );
+          })}
+          {finishLevel ? (
+            <div>
+              <button
+                className="animate__animated animate__zoomIn  btn btn-primary "
+                onClick={() => {
+                  if (index < animals.length - 1) {
+                    setIndex((prev) => prev + 1);
+                    setFinishLevel(false);
+                    setDisabledLetters([]);
+                    setLetters([]);
+                  } else {
+                    backToStart.play();
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 1000);
+                  }
+                }}
+              >
+                {index < animals.length - 1 ? "SIGUIENTE" : "VOLVER A EMPEZAR"}
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

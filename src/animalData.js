@@ -1,5 +1,5 @@
 import cat from '../src/images/gato.png'
-import delfin from '../src/images/delfin.jpg'
+import delfin from '../src/images/delfin.png'
 import nutria from '../src/images/nutria.png'
 import tigre from '../src/images/tigre.png'
 import pez from '../src/images/pez.png'
