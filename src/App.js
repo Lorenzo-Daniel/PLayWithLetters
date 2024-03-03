@@ -12,10 +12,6 @@ function App() {
   const [congratulations, setCongratulations] = useState(false);
   const word = animals[index].word;
   const [finishLevel, setFinishLevel] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
-
-
   console.log(finishLevel);
 
   useEffect(() => {
@@ -45,10 +41,8 @@ function App() {
   }, [disabledLetters, word, index]);
 
   const handleDragStart = (e, letter) => {
-  if (!isDragging) {
     e.dataTransfer.setData("text/plain", letter);
-  }
-};
+  };
 
   const handleDragOver = (e, letter) => {
     e.preventDefault();
@@ -166,14 +160,15 @@ function App() {
               key={index}
               className={letter === "" ? "" : "letter-box draggable"}
               draggable={!disabledLetters.includes(letter)}
+              onDragStart={(e) => handleDragStart(e, letter)}
               style={{
                 transform: `rotate(${rotate}deg) translateY(${translateY}px)`,
               }}
               onMouseDown={(e) => (e.target.style.padding = "40px")}
               onMouseLeave={(e) => (e.target.style.padding = "")}
-              onTouchStart={(e) =>{ setIsDragging(true) (e.target.style.padding = "40px")} }
-              onTouchEnd={(e) => setIsDragging(false)}
-              onDragStart={(e) => handleDragStart(e, letter)}
+              onTouchStart={(e) => (e.target.style.padding = "40px")}
+              onTouchEnd={(e) => (e.target.style.padding = "")}
+              ond
             >
               {letter}
             </div>
