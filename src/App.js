@@ -16,7 +16,7 @@ function App() {
 
   const speachLetter = (letter) => {
     const speech = new SpeechSynthesisUtterance();
-      speech.text = letter;
+      speech.text = letter ;
       speech.lang = "es";
       window.speechSynthesis.speak(speech);
   }
@@ -213,8 +213,8 @@ function App() {
               onMouseDown={(e) => {(e.target.style.padding = "40px")
               speachLetter(letter)}}
               onMouseLeave={(e) => (e.target.style.padding = "")}
-              // onTouchStart={(e) => (e.target.style.padding = "40px")}
-              // onTouchEnd={(e) => (e.target.style.padding = "")}
+              onTouchStart={(e) => (e.target.style.padding = "40px")}
+              onTouchEnd={(e) => (e.target.style.padding = "")}
             >
               {letter}
             </div>
