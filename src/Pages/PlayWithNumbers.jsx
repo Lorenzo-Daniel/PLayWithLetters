@@ -97,7 +97,7 @@ function PlayWithNumbers() {
             })}
           </div>
 
-          <div className="mx-2">{object.operator}</div>
+          <div className="mx-2  fs-1 fw-bold">{object.operator}</div>
 
           <div
             className="d-flex justify-content-center align-items-center flex-wrap"
@@ -117,7 +117,7 @@ function PlayWithNumbers() {
               );
             })}
           </div>
-          <div className="mx-2">{"="}</div>
+          <div className="mx-2  fs-1 fw-bold">{"="}</div>
 
           <div
             className={
@@ -154,6 +154,7 @@ function PlayWithNumbers() {
                       speachLetter(num);
                       selectedLetter.play();
                     }}
+                    onMouseUp={(e) => (e.target.style.padding = "")}
                     onTouchEnd={(e) => (e.target.style.padding = "")}
                   >
                     {num}
