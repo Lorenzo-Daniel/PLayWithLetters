@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "animate.css";
+
 import { animals } from "../animalData";
 import "bootstrap/dist/css/bootstrap.css";
 import coolLetter from "../Audios/coolLetter.wav";
@@ -58,7 +58,6 @@ function App() {
     // eslint-disable-next-line
   }, [word]);
 
-  console.log(disabledLetters);
   useEffect(() => {
     if (shuffledLetters.length === 0) {
       setFinishLevel(true);

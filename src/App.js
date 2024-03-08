@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./Pages/Home";
 import PlayWithLetter from "./Pages/PlayWithLetters";
+import "animate.css";
 import Navbar from "./Componets/Navbar";
 import PlayWithNumbers from "./Pages/PlayWithNumbers";
 function App() {

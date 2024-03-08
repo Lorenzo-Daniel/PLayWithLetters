@@ -44,7 +44,7 @@ body, html {
     border-radius: 5px;
     user-select: none;
   }
-  .word .dropped {
+   .dropped {
     background-color: violet;
     display: flex;
     justify-content: center;
