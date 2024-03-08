@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { numbers } from "../numbersData";
+import { useNavigate } from "react-router-dom";
 import error from "../Audios/error.wav";
 import letterSelected from "../Audios/letterSelected.wav";
 import back from "../Audios/back.wav";
@@ -12,7 +13,7 @@ function PlayWithNumbers() {
   const [showResult, setShowResult] = useState(false);
   const [object, setObject] = useState(numbers[index]);
   // const [result,setResult] = useState('')
-
+const navigate = useNavigate()
   useEffect(() => {
     backToStart.play();
     setObject(numbers[index]);
@@ -172,7 +173,7 @@ function PlayWithNumbers() {
                 } else {
                   backToStart.play();
                   setTimeout(() => {
-                    window.location.reload();
+                  setIndex(0)
                   }, 1000);
                 }
               }}
