@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { numbers } from "../numbersData";
-// import { useNavigate } from "react-router-dom";
 import error from "../Audios/error.wav";
 import letterSelected from "../Audios/letterSelected.wav";
 import back from "../Audios/back.wav";
@@ -12,8 +11,7 @@ function PlayWithNumbers() {
   const [index, setIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [object, setObject] = useState(numbers[index]);
-  // const [result,setResult] = useState('')
-  // const navigate = useNavigate()
+
   useEffect(() => {
     backToStart.play();
     setObject(numbers[index]);
@@ -71,7 +69,7 @@ function PlayWithNumbers() {
   };
   return (
     <div className="App" style={{ backgroundColor: numbers[index].backGround }}>
-      <div className="d-flex flex-column align-items-center w-100  gap-4 p-2">
+      <div className="d-flex flex-column align-items-center w-100  p-2">
         <div
           className={
             !showResult
@@ -82,9 +80,8 @@ function PlayWithNumbers() {
           <div
             className="d-flex justify-content-center align-items-center flex-wrap"
             style={{
-              // padding: 15,
               borderRadius: 500,
-              minWidth: 130,
+              width: 'auto',
               minHeight: 100,
             }}
           >
@@ -97,16 +94,20 @@ function PlayWithNumbers() {
             })}
           </div>
 
-          <div className="fs-1 fw-bold d-flex ">
-            <i className="fa-solid fa-plus" />
+          <div className="fs-1 fw-bold d-flex text-success ">
+          { object.operator === '+' ?
+            <i className="fa-solid fa-plus" />:
+            <i className="fa-solid fa-minus" />
+
+
+          }
           </div>
 
           <div
             className="d-flex justify-content-center align-items-center flex-wrap"
             style={{
-              // padding: 15,
               borderRadius: 500,
-              minWidth: 130,
+              width:'auto',
               minHeight: 100,
               maxWidth: 1200,
             }}
@@ -119,7 +120,10 @@ function PlayWithNumbers() {
               );
             })}
           </div>
-          <div className="me-3 ms-0  fs-1 fw-bold"><i className="fa-solid fa-equals"></i></div>
+
+          <div className="me-3 ms-0  fs-1 fw-bold text-success">
+            <i className="fa-solid fa-equals"></i>
+          </div>
 
           <div
             className={
@@ -130,9 +134,10 @@ function PlayWithNumbers() {
           >
             {showResult ? object.result : ""}
           </div>
+
         </div>
 
-        <div className="d-flex ">
+        <div className="d-flex mt-4 ">
           {!showResult
             ? object.numbers.map((num, index) => {
                 return (
