@@ -13,11 +13,11 @@ function PlayWithNumbers() {
   const [showResult, setShowResult] = useState(false);
   const [object, setObject] = useState(numbers[index]);
   // const [result,setResult] = useState('')
-// const navigate = useNavigate()
+  // const navigate = useNavigate()
   useEffect(() => {
     backToStart.play();
     setObject(numbers[index]);
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [index]);
   //------------------------------------------------------
 
@@ -82,10 +82,10 @@ function PlayWithNumbers() {
           <div
             className="d-flex justify-content-center align-items-center flex-wrap"
             style={{
-              padding: 15,
-              backgroundColor: "white",
+              // padding: 15,
               borderRadius: 500,
-              maxWidth: 130,
+              minWidth: 130,
+              minHeight: 100,
             }}
           >
             {object.firstValue.map((element, i) => {
@@ -97,16 +97,18 @@ function PlayWithNumbers() {
             })}
           </div>
 
-          <div className="mx-2  fs-1 fw-bold">{object.operator}</div>
+          <div className="fs-1 fw-bold d-flex ">
+            <i className="fa-solid fa-plus" />
+          </div>
 
           <div
             className="d-flex justify-content-center align-items-center flex-wrap"
             style={{
-              padding: 15,
-              backgroundColor: "white",
+              // padding: 15,
               borderRadius: 500,
-              maxWidth: 130,
-              
+              minWidth: 130,
+              minHeight: 100,
+              maxWidth: 1200,
             }}
           >
             {object.secondValue.map((element, i) => {
@@ -117,11 +119,11 @@ function PlayWithNumbers() {
               );
             })}
           </div>
-          <div className="mx-2  fs-1 fw-bold">{"="}</div>
+          <div className="me-3 ms-0  fs-1 fw-bold"><i className="fa-solid fa-equals"></i></div>
 
           <div
             className={
-              !showResult ?"letter-box text-white m-0"  : "letter-box  dropped"
+              !showResult ? "letter-box text-white m-0" : "letter-box  dropped"
             }
             onDrop={handleDrop(object.result.toString())}
             onDragOver={(e) => handleDragOver(e, object.result)}
@@ -174,8 +176,9 @@ function PlayWithNumbers() {
                 } else {
                   backToStart.play();
                   setTimeout(() => {
-                  setIndex(0)
-                  // window.location.reload();
+                    setIndex(0);
+                    setShowResult(false);
+                    // window.location.reload();
                   }, 1000);
                 }
               }}
