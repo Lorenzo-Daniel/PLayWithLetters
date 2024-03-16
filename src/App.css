@@ -2,6 +2,11 @@ body, html {
   margin: 0px;
   padding: 0px;
   height: 100%;
+  cursor: url('../src/images/hand.png')  ;
+}
+
+.custom-cursor {
+  cursor: url('../src/images/hand.png') 100 100, auto;
 }
 
 
@@ -12,13 +17,25 @@ body, html {
   align-items: center;
   justify-content: center;
   row-gap: 15px;
+  color: #8080807c;
+}
+.home-icon {
+  color: white;
 }
 
 
+.home-icon:hover{
+  color:violet;
+}
+.nav-link:hover{
+    background-color:violet;
+    border-radius: 7px;
+  }
 
 
 @media (min-width:320px) {
   .App {
+  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +59,8 @@ body, html {
     margin: 5px;
     padding: 18px;
     border-radius: 5px;
-    user-select: none;
+  
+  user-select: none;
   }
    .dropped {
     background-color: violet;

@@ -9,8 +9,8 @@ import oso from "../src/images/oso.png";
 import vaca from "../src/images/vaca.png";
 import cerdo from "../src/images/cerdo.png";
 import jirafa from "../src/images/jirafa.png";
-import hipopotamo from "../src/images/hipopotamo.jpg";
-import caballo from "../src/images/caballo.png";
+// import hipopotamo from "../src/images/hipopotamo.jpg";
+// import caballo from "../src/images/caballo.png";
 
 export const animals = [
   { word: "oso", image: oso, backGround: "#c6c5ff" },
@@ -24,6 +24,6 @@ export const animals = [
   { word: "jirafa", image: jirafa, backGround: "#7c4e9f" },
   { word: "Nutria", image: nutria, backGround: "#f07021" },
   { word: "Delfín", image: delfin, backGround: "#7be9ff" },
-  { word: "caballo", image: caballo, backGround: "#bdfa7b" },
-  { word: "hipopótamo", image: hipopotamo, backGround: "#b1f1fe" },
+  // { word: "caballo", image: caballo, backGround: "#bdfa7b" },
+  // { word: "hipopótamo", image: hipopotamo, backGround: "#b1f1fe" },
 ];

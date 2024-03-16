@@ -20,7 +20,7 @@ function App() {
   const [congratulations, setCongratulations] = useState(false);
   const word = animals[index].word;
   const [finishLevel, setFinishLevel] = useState(false);
-
+console.log(disabledLetters);
   const speachLetter = (letter) => {
     const speech = new SpeechSynthesisUtterance();
     speech.text = letter;
@@ -86,7 +86,7 @@ function App() {
     }
     // eslint-disable-next-line
   }, [shuffledLetters, disabledLetters, word, index]);
-  console.log(shuffledLetters.length);
+ 
 
   const handleDragStart = (e, letter) => {
     e.dataTransfer.setData("text/plain", letter);
@@ -105,9 +105,15 @@ function App() {
 
   const handleDragLeave = (e, letter) => {
     const isDropped = e.dataTransfer.getData("text/plain");
-    if (isDropped === letter) {
-      e.target.className = "letter-box  ";
-    }
+    
+      if(isDropped === letter &&
+        removedLettersCount[isDropped] > 0 &&
+        !disabledLetters.includes(letter)){
+        e.target.className = "letter-box  dropped";
+
+      }else {
+        e.target.className = "letter-box  ";
+      }
     if (disabledLetters.includes(letter)) {
       e.target.className = "letter-box dropped ";
     }
