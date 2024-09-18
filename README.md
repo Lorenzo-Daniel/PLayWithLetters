@@ -47,4 +47,4 @@ In developing this application, various technologies and APIs were explored:
 The application is primarily aimed at young children who are in the process of learning the alphabet, numbers, and basic math operations. With the integration of animations, sounds, and simple gameplay mechanics, children can learn in an interactive and entertaining way.
 
 
-[Visit the PLay with letters and numbers Web App](https://strong-snickerdoodle-adfba9.netlify.app/)
+[Visit the PLay with letters and numbers Web App](https://play-with-numbers-and-letters.netlify.app/)
